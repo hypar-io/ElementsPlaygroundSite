@@ -336,6 +336,101 @@
             Fully transparent material.
             </summary>
         </member>
+        <member name="T:Elements.Ceiling">
+            <summary>
+            A ceiling defined by a planar profile extruded to a thickness.
+            </summary>
+        </member>
+        <member name="P:Elements.Ceiling.Thickness">
+            <summary>
+            The thickness of the ceiling.
+            </summary>
+        </member>
+        <member name="P:Elements.Ceiling.Elevation">
+            <summary>
+            The elevation of the ceiling.
+            </summary>
+        </member>
+        <member name="P:Elements.Ceiling.Perimeter">
+            <summary>
+            The perimeter of the ceiling.
+            </summary>
+        </member>
+        <member name="P:Elements.Ceiling.Openings">
+            <summary>
+            A collection of openings in the ceiling.
+            </summary>
+        </member>
+        <member name="M:Elements.Ceiling.#ctor(Elements.Geometry.Polygon,System.Double,System.Double,Elements.Material,Elements.Geometry.Transform,Elements.Geometry.Representation,System.Boolean,System.Guid,System.String)">
+            <summary>
+            Construct a ceiling by extruding a profile.
+            </summary>
+            <param name="perimeter">The plan profile of the ceiling. It must lie on the XY plane.
+            The Z coordinate will be ignored</param>
+            <param name="thickness">The thickness of the ceiling.</param>
+            <param name="elevation">The elevation of the ceiling.</param>
+            <param name="material">The material of the ceiling.</param>
+            <param name="transform">An optional transform for the ceiling.</param>
+            <param name="representation">The ceiling's representation.</param>
+            <param name="isElementDefinition">Is this an element definition?</param>
+            <param name="id">The id of the ceiling.</param>
+            <param name="name">The name of the ceiling.</param>
+        </member>
+        <member name="M:Elements.Ceiling.#ctor(Elements.Geometry.Polygon,System.Double,Elements.Material,Elements.Geometry.Transform,Elements.Geometry.Representation,System.Boolean,System.Guid,System.String)">
+            <summary>
+            Construct a ceiling by extruding a profile.
+            </summary>
+            <param name="perimeter">The plan perimeter of the ceiling. It must lie on the XY plane.
+            Z coordinate will be used as elevation</param>
+            <param name="thickness">The thickness of the ceiling.</param>
+            <param name="material">The material of the ceiling.</param>
+            <param name="transform">An optional transform for the ceiling.</param>
+            <param name="representation">The ceiling's representation.</param>
+            <param name="isElementDefinition">Is this an element definition?</param>
+            <param name="id">The id of the ceiling.</param>
+            <param name="name">The name of the ceiling.</param>
+        </member>
+        <member name="M:Elements.Ceiling.#ctor(Elements.Geometry.Polygon,System.Double,System.Double,System.Guid,Elements.Material,Elements.Geometry.Transform,Elements.Geometry.Representation,System.Boolean,System.String)">
+            <summary>
+            Construct a ceiling by extruding a profile. It's a private constructor that doesn't add elevation to transform
+            </summary>
+            <param name="perimeter">The plan profile of the ceiling. It must lie on the XY plane.
+            The Z coordinate will be ignored</param>
+            <param name="thickness">The thickness of the ceiling.</param>
+            <param name="elevation">The elevation of the ceiling.</param>
+            <param name="material">The material of the ceiling.</param>
+            <param name="transform">An optional transform for the ceiling.</param>
+            <param name="representation">The ceiling's representation.</param>
+            <param name="isElementDefinition">Is this an element definition?</param>
+            <param name="id">The id of the ceiling.</param>
+            <param name="name">The name of the ceiling.</param>
+        </member>
+        <member name="M:Elements.Ceiling.GetProfile">
+            <summary>
+            The Profile of the Ceiling computed from its Perimeter and the Openings.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Elements.Ceiling.AddOpening(Elements.Geometry.Polygon)">
+            <summary>
+            Add an Opening to the Ceiling.
+            </summary>
+            <param name="perimeter">The plan perimeter of the ceiling. It must lie on the XY plane.
+            The Z coordinate will be ignored</param>
+        </member>
+        <member name="M:Elements.Ceiling.UpdateRepresentations">
+            <summary>
+            Update the representations.
+            </summary>
+        </member>
+        <member name="M:Elements.Ceiling.#ctor(Elements.Geometry.Solids.Solid,Elements.Geometry.Transform,System.Boolean)">
+            <summary>
+            Construct a ceiling from geometry.
+            </summary>
+            <param name="geometry">The geometry of the ceiling.</param>
+            <param name="transform">The ceiling's Transform.</param>
+            <param name="isElementDefinition">Is this an element definition?</param>
+        </member>
         <member name="T:Elements.Column">
             <summary>
             A vertical structural framing element.
@@ -3878,6 +3973,12 @@
         <member name="P:Elements.Geometry.Profile.Voids">
             <summary>A collection of Polygons representing voids in the profile.</summary>
         </member>
+        <member name="M:Elements.Geometry.Profile.#ctor">
+            <summary>
+            The default constructor is used by derived classes, 
+            and is not intended to be used directly.
+            </summary>
+        </member>
         <member name="M:Elements.Geometry.Profile.#ctor(Elements.Geometry.Polygon,System.Collections.Generic.IList{Elements.Geometry.Polygon},System.Guid,System.String)">
             <summary>
             Create a profile.
@@ -4063,6 +4164,16 @@
             Profile extension methods.
             </summary>
         </member>
+        <member name="T:Elements.Geometry.Profiles.CProfileFactory">
+            <summary>
+            A factory for creation C profiles.
+            </summary>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.CProfileFactory.#ctor">
+            <summary>
+            Create an C profile factory.
+            </summary>
+        </member>
         <member name="T:Elements.Geometry.Profiles.HSSPipeProfile">
             <summary>
             A hollow structural steel profile.
@@ -4104,51 +4215,155 @@
             <param name="type">The type of the profile.</param>
             <returns>A hollow structural steel profile.</returns>
         </member>
-        <member name="T:Elements.Geometry.Profiles.ProfileFactory`2">
+        <member name="T:Elements.Geometry.Profiles.HSSProfileFactory">
             <summary>
-            Base class for profile factories.
-            A profile factory is constructed with a table of data where each row
-            represents a comma-delimited set of profile properties.
+            A factory for creation L profiles.
             </summary>
         </member>
-        <member name="F:Elements.Geometry.Profiles.ProfileFactory`2._profileData">
+        <member name="M:Elements.Geometry.Profiles.HSSProfileFactory.#ctor">
+            <summary>
+            Create an C profile factory.
+            </summary>
+        </member>
+        <member name="T:Elements.Geometry.Profiles.LProfileFactory">
+            <summary>
+            A factory for creation L profiles.
+            </summary>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.LProfileFactory.#ctor">
+            <summary>
+            Create an L profile factory.
+            </summary>
+        </member>
+        <member name="T:Elements.Geometry.Profiles.MCProfileFactory">
+            <summary>
+            A factory for creation MC profiles.
+            </summary>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.MCProfileFactory.#ctor">
+            <summary>
+            Create an MC profile factory.
+            </summary>
+        </member>
+        <member name="T:Elements.Geometry.Profiles.ParametricProfile">
+            <summary>
+            A profile whose vertex locations are defined by a parametric expression.
+            </summary>
+        </member>
+        <member name="P:Elements.Geometry.Profiles.ParametricProfile.PerimeterVectorExpressions">
+            <summary>
+            A collection of vector expressions.
+            </summary>
+        </member>
+        <member name="P:Elements.Geometry.Profiles.ParametricProfile.VoidVectorExpressions">
+            <summary>
+            A collection of vector expressions.
+            </summary>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.ParametricProfile.#ctor(System.Collections.Generic.List{Elements.Geometry.Profiles.VectorExpression},System.Collections.Generic.List{System.Collections.Generic.List{Elements.Geometry.Profiles.VectorExpression}},Elements.Geometry.Polygon,System.Collections.Generic.IList{Elements.Geometry.Polygon},System.Guid,System.String)">
+            <summary>
+            Create a parametric profile.
+            </summary>
+            <param name="perimeterVectorExpressions"></param>
+            <param name="voidVectorExpressions"></param>
+            <param name="perimeter">The perimeter of the profile.</param>
+            <param name="voids">The voids of the profile.</param>
+            <param name="id">The unique identifier of the profile.</param>
+            <param name="name">The name of the profile.</param>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.ParametricProfile.SetGeometryAsync">
+            <summary>
+            Create the geometry of the parametric profile.
+            </summary>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.ParametricProfile.CreatePolygonFromScriptAsync(System.String)">
+            <summary>
+            Create a polygon by evaluating all vertex expressions
+            in one script evaluation.
+            </summary>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.ParametricProfile.SetPropertiesFromProfileData(System.Collections.Generic.Dictionary{System.String,System.Double},System.String)">
+            <summary>
+            Set the properties or public member values of this profile instance
+            to the values contained in the supplied dictionary.
+            </summary>
+            <param name="profileData">A dictionary of property values.</param>
+        </member>
+        <member name="T:Elements.Geometry.Profiles.ParametricProfileFactory`2">
+            <summary>
+            A profile factory which creates parametric profiles.
+            </summary>
+            <typeparam name="TProfileType"></typeparam>
+            <typeparam name="TProfile"></typeparam>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.ParametricProfileFactory`2.#ctor(System.String,System.Double)">
+            <summary>
+            Create a parametric profile factory by reading from a csv.
+            </summary>
+            <param name="csvPath">The path of the csv.</param>
+            <param name="conversion">The conversion factor applied to values in the catalogue.</param>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.ParametricProfileFactory`2.AllProfilesAsync">
+            <summary>
+            Get all profiles.
+            </summary>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.ParametricProfileFactory`2.GetProfileByNameAsync(System.String)">
+            <summary>
+            Get a profile by name.
+            </summary>
+            <param name="name">The name of the profile.</param>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.ParametricProfileFactory`2.GetProfileByTypeAsync(`0)">
+            <summary>
+            Get a profile by type.
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="T:Elements.Geometry.Profiles.ProfileFactoryBase`2">
+            <summary>
+            Base class for profile factories.
+            </summary>
+            <typeparam name="TProfileType"></typeparam>
+            <typeparam name="TProfile"></typeparam>
+        </member>
+        <member name="F:Elements.Geometry.Profiles.ProfileFactoryBase`2._profileData">
             <summary>
             A collection of profile data.
             </summary>
         </member>
-        <member name="M:Elements.Geometry.Profiles.ProfileFactory`2.#ctor(System.String)">
+        <member name="M:Elements.Geometry.Profiles.ProfileFactoryBase`2.#ctor(System.String)">
             <summary>
             Construct a profile factory.
             </summary>
             <param name="data">A comma separated data value representing the properties of the profiles.</param>
         </member>
-        <member name="M:Elements.Geometry.Profiles.ProfileFactory`2.GetProfileByName(System.String)">
+        <member name="M:Elements.Geometry.Profiles.ProfileFactoryBase`2.GetProfileByName(System.String)">
             <summary>
-            Get a profile by name from the factory.
+            Get a profile by name.
             </summary>
-            <param name="name">The name of the profile.</param>
-            <returns>A profile. Throws an exception if a profile with the specified name cannot be found.</returns>
-            <exception>Thrown when a profile with the specfied name cannot be found.</exception>
+            <param name="name"></param>
+            <returns></returns>
         </member>
-        <member name="M:Elements.Geometry.Profiles.ProfileFactory`2.GetProfileByType(`0)">
+        <member name="M:Elements.Geometry.Profiles.ProfileFactoryBase`2.GetProfileByType(`0)">
             <summary>
-            Get a profile by type enumeration from the factory.
+            Get a profile by type.
             </summary>
-            <param name="type">The enumerated type of the profile.</param>
-            <returns>A profile. Throws an exception if a profile with the specified name cannot be found.</returns>
-            <exception>Thrown when a profile of the specfied type cannot be found.</exception>
+            <param name="type"></param>
+            <returns></returns>
         </member>
-        <member name="M:Elements.Geometry.Profiles.ProfileFactory`2.AllProfiles">
+        <member name="M:Elements.Geometry.Profiles.ProfileFactoryBase`2.AllProfiles">
             <summary>
-            Get all Profiles available in the factory.
+            Get all profiles.
             </summary>
-            <returns>A collection of all profiles available from the factory.</returns>
+            <returns></returns>
         </member>
-        <member name="M:Elements.Geometry.Profiles.ProfileFactory`2.CreateProfile(System.Int32)">
+        <member name="M:Elements.Geometry.Profiles.ProfileFactoryBase`2.CreateProfile(System.Int32)">
             <summary>
-            Create the profile give a type.
+            Create a profile.
             </summary>
-            <param name="typeIndex">The index of the type of profile to create.</param>
+            <param name="typeIndex"></param>
+            <returns></returns>
         </member>
         <member name="T:Elements.Geometry.Profiles.RHSProfile">
             <summary>
@@ -4223,6 +4438,45 @@
             </summary>
             <param name="type">The type of the profile.</param>
             <returns>A rectangular hollow section profile.</returns>
+        </member>
+        <member name="T:Elements.Geometry.Profiles.STProfileFactory">
+            <summary>
+            A factory for creation L profiles.
+            </summary>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.STProfileFactory.#ctor">
+            <summary>
+            Create an ST profile factory.
+            </summary>
+        </member>
+        <member name="T:Elements.Geometry.Profiles.VectorExpression">
+            <summary>
+            A collection of expressions describing the X, Y, and Z coordinates
+            of a vertex.
+            </summary>
+        </member>
+        <member name="P:Elements.Geometry.Profiles.VectorExpression.X">
+            <summary>
+            The expression of the X coordinate of the vector.
+            </summary>
+        </member>
+        <member name="P:Elements.Geometry.Profiles.VectorExpression.Y">
+            <summary>
+            The expression of the Y coordinate of the vector.
+            </summary>
+        </member>
+        <member name="P:Elements.Geometry.Profiles.VectorExpression.Z">
+            <summary>
+            The expression of the Z coordinate of the vector.
+            </summary>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.VectorExpression.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Create a vector expression.
+            </summary>
+            <param name="x">The expression of the X coordinate of the vector.</param>
+            <param name="y">The expression of the Y coordinate of the vector.</param>
+            <param name="z">The expression of the Z coordinate of the vector.</param>
         </member>
         <member name="T:Elements.Geometry.Profiles.VerticalAlignment">
             <summary>
@@ -4301,12 +4555,32 @@
             <param name="name">The name of the profile.</param>
             <returns>A wide flange profile.</returns>
         </member>
-        <member name="M:Elements.Geometry.Profiles.WideFlangeProfileFactory.GetProfileByType(Elements.Geometry.Profiles.WideFlangeProfileType)">
+        <member name="M:Elements.Geometry.Profiles.WideFlangeProfileFactory.GetProfileByType(Elements.Geometry.WideFlangeProfileType)">
             <summary>
             Get a profile by type.
             </summary>
             <param name="type">The type of the profile.</param>
             <returns>A wide flange profile.</returns>
+        </member>
+        <member name="T:Elements.Geometry.Profiles.WProfileFactory">
+            <summary>
+            A factory for creation W profiles.
+            </summary>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.WProfileFactory.#ctor">
+            <summary>
+            Create an L profile factory.
+            </summary>
+        </member>
+        <member name="T:Elements.Geometry.Profiles.WTProfileFactory">
+            <summary>
+            A factory for creation WT profiles.
+            </summary>
+        </member>
+        <member name="M:Elements.Geometry.Profiles.WTProfileFactory.#ctor">
+            <summary>
+            Create an WT profile factory.
+            </summary>
         </member>
         <member name="T:Elements.Geometry.Quaternion">
             <summary>
@@ -6067,6 +6341,75 @@
             The name of the override
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Elements.Joist">
+            <summary>
+            A joist.
+            </summary>
+            <example>
+            [!code-csharp[Main](../../Elements/test/StructuralFramingTests.cs?name=joist-example)]
+            </example>
+        </member>
+        <member name="P:Elements.Joist.DistanceToFirstPanel">
+            <summary>
+            The distance to the first panel (Y).
+            </summary>
+        </member>
+        <member name="P:Elements.Joist.TopChordProfile">
+            <summary>
+            Profile of the top chord of the joist.
+            </summary>
+        </member>
+        <member name="P:Elements.Joist.BottomChordProfile">
+            <summary>
+            Profile of the bottom chord of the joist.
+            </summary>
+        </member>
+        <member name="P:Elements.Joist.WebProfile">
+            <summary>
+            Profile of the web of the joist.
+            </summary>
+        </member>
+        <member name="P:Elements.Joist.Depth">
+            <summary>
+            The depth of the joist.
+            </summary>
+        </member>
+        <member name="P:Elements.Joist.CellCount">
+            <summary>
+            The number of cells in the joist.
+            </summary>
+        </member>
+        <member name="P:Elements.Joist.SeatDepth">
+            <summary>
+            The seat depth of the joist.
+            </summary>
+        </member>
+        <member name="P:Elements.Joist.JoistPoints">
+            <summary>
+            The joist support points along the top of the joist.
+            </summary>
+        </member>
+        <member name="M:Elements.Joist.#ctor(Elements.Geometry.Line,Elements.Geometry.Profiles.LProfile,Elements.Geometry.Profiles.LProfile,Elements.Geometry.Profiles.LProfile,System.Double,System.Int32,System.Double,System.Double,Elements.Material,System.String,System.Guid)">
+            <summary>
+            Construct a new BarJoist.
+            </summary>
+            <param name="curve">The centerline of the joist.</param>
+            <param name="topChordProfile">The top chord profile of the joist.</param>
+            <param name="bottomChordProfile">The bottom chord profile of the joist.</param>
+            <param name="webProfile">The web profile of the joist.</param>
+            <param name="material">The joist's material.</param>
+            <param name="name">The name of the joist.</param>
+            <param name="id">The unique identifier of the joist.</param>
+            <param name="depth">The depth of the joist.</param>
+            <param name="cellCount">The cell count of the joist.</param>
+            <param name="seatDepth">The seat depth of the joist.</param>
+            <param name="distanceToFirstPanel">The distance to the first panel of the joist (Y).</param>
+        </member>
+        <member name="M:Elements.Joist.UpdateRepresentations">
+            <summary>
+            Update the bar joist's representation.
+            </summary>
         </member>
         <member name="T:Elements.LightType">
             <summary>
@@ -9356,6 +9699,14 @@
         <member name="M:Elements.Spatial.Grid2d.GetTrimmedCellGeometry">
             <summary>
             Get a list of polygons representing this cell boundary, trimmed by any polygon boundary.
+            If the cell falls completely outside of the boundary, an empty array will be returned.
+            </summary>
+            <returns>Curves representing this cell in world coordinates.</returns>
+        </member>
+        <member name="M:Elements.Spatial.Grid2d.GetTrimmedCellProfiles">
+            <summary>
+            Get a list of profiles representing this cell boundary, trimmed by any polygon boundary.
+            Internal polygons that are completely inside the cell and are clockwise, will be added as profile voids.
             If the cell falls completely outside of the boundary, an empty array will be returned.
             </summary>
             <returns>Curves representing this cell in world coordinates.</returns>
