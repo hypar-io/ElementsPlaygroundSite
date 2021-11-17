@@ -1,5 +1,6 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.133.0/build/three.module.js'
 import { OrbitControls } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/controls/OrbitControls.js';
+import { ArcballControls } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/controls/ArcballControls.js';
 import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/loaders/GLTFLoader.js';
 
 window.model = {
@@ -73,7 +74,8 @@ function initialize3D() {
     renderer.setSize(div.clientWidth, div.clientHeight);
     div.appendChild(renderer.domElement);
 
-    const controls = new OrbitControls(camera, renderer.domElement);
+    const controls = new ArcballControls(camera, renderer.domElement,scene);
+    controls.setGizmosVisible(false);
 
     const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
     directionalLight.position.set(0.5, 0.5, 0);
